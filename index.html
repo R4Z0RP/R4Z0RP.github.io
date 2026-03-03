@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan de Estudio · Licencia B1 Colombia</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rojo: #e63329;
+    --amarillo: #f5c518;
+    --azul: #003087;
+    --verde: #1a7a4a;
+    --bg: #f7f4ef;
+    --text: #1a1a1a;
+    --card: #ffffff;
+    --muted: #6b6560;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--azul);
+    padding: 48px 40px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: var(--amarillo);
+    border-radius: 50%;
+    opacity: 0.12;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 30%;
+    width: 200px; height: 200px;
+    background: var(--rojo);
+    border-radius: 50%;
+    opacity: 0.15;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--amarillo);
+    color: var(--azul);
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.1;
+    max-width: 600px;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: var(--amarillo); }
+  .hero-sub {
+    color: rgba(255,255,255,0.7);
+    font-size: 15px;
+    max-width: 480px;
+    line-height: 1.5;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 32px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--amarillo);
+    display: block;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+  }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #ddd;
+  }
+
+  /* BLOQUES TEMÁTICOS */
+  .bloques-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .bloque-card {
+    border-radius: 14px;
+    padding: 22px 20px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+  .bloque-card:hover { transform: translateY(-3px); }
+  .bloque-card.movilidad { background: var(--azul); color: #fff; }
+  .bloque-card.normas    { background: var(--rojo); color: #fff; }
+  .bloque-card.senales   { background: var(--amarillo); color: var(--azul); }
+  .bloque-card.mecanica  { background: var(--verde); color: #fff; }
+
+  .bloque-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    opacity: 0.2;
+    position: absolute;
+    top: 10px; right: 16px;
+    line-height: 1;
+  }
+  .bloque-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .bloque-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+  .bloque-pct {
+    font-size: 12px;
+    opacity: 0.75;
+  }
+  .bloque-tags {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .tag {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.2);
+  }
+  .bloque-card.senales .tag { background: rgba(0,0,0,0.1); }
+
+  /* DÍAS */
+  .dias-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 48px;
+  }
+  .dia-row {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 20px 24px;
+    display: grid;
+    grid-template-columns: 90px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    border-left: 4px solid transparent;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: box-shadow 0.2s;
+  }
+  .dia-row:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+  .dia-row.d1 { border-color: var(--azul); }
+  .dia-row.d2 { border-color: var(--rojo); }
+  .dia-row.d3 { border-color: var(--amarillo); }
+  .dia-row.d4 { border-color: var(--verde); }
+  .dia-row.d5 { border-color: #8b5cf6; }
+  .dia-row.d6 { border-color: #f97316; }
+  .dia-row.d7 { border-color: #0ea5e9; }
+
+  .dia-label {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .dia-label span {
+    display: block;
+    font-size: 22px;
+    color: var(--text);
+    line-height: 1.1;
+  }
+  .dia-content {}
+  .dia-tema {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+  .dia-actividades {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .dia-actividades li {
+    list-style: none;
+    padding-left: 0;
+  }
+  .dia-actividades li::before {
+    content: '→ ';
+    color: var(--rojo);
+    font-weight: 600;
+  }
+  .dia-tiempo {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--muted);
+    white-space: nowrap;
+    text-align: right;
+  }
+  .dia-tiempo span {
+    display: block;
+    font-size: 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* TIPS EXAMEN */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 14px;
+    margin-bottom: 48px;
+  }
+  .tip-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 18px 20px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .tip-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .tip-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .tip-text {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* RECURSOS */
+  .recursos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+    margin-bottom: 48px;
+  }
+  .recurso-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border-top: 3px solid var(--azul);
+  }
+  .recurso-card:nth-child(2) { border-color: var(--rojo); }
+  .recurso-card:nth-child(3) { border-color: var(--verde); }
+  .recurso-card:nth-child(4) { border-color: #8b5cf6; }
+  .recurso-tipo {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .recurso-nombre {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .recurso-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* MULTAS */
+  .multas-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin-bottom: 48px;
+    font-size: 13px;
+  }
+  .multas-table th {
+    background: var(--azul);
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 12px 16px;
+    text-align: left;
+  }
+  .multas-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f0ece6;
+    vertical-align: top;
+    line-height: 1.5;
+    color: var(--text);
+  }
+  .multas-table tr:last-child td { border-bottom: none; }
+  .multas-table tr:hover td { background: #faf7f2; }
+  .nivel {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .nivel-a { background: #fee2e2; color: #b91c1c; }
+  .nivel-b { background: #fef3c7; color: #92400e; }
+  .nivel-c { background: #dbeafe; color: #1e40af; }
+  .nivel-d { background: #d1fae5; color: #065f46; }
+
+  /* FOOTER */
+  .footer {
+    background: var(--azul);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+  }
+  .footer strong { color: var(--amarillo); }
+
+  /* PROGRESS BAR */
+  .progress-bar {
+    height: 6px;
+    background: #e5e0d8;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 6px;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: var(--rojo);
+  }
+
+  @media (max-width: 600px) {
+    .dia-row { grid-template-columns: 70px 1fr; }
+    .dia-tiempo { display: none; }
+    .hero { padding: 32px 20px; }
+    .container { padding: 24px 16px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">🇨🇴 Licencia B1 · Colombia</div>
+  <h1>Plan de Estudio<br><span>Prueba Teórica</span><br>en 3 días</h1>
+  <p class="hero-sub">Preparación intensiva para la prueba teórica de conducción. El examen consta de 40 preguntas y debes obtener más del 80% para aprobar.</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">40</span>
+      <span class="stat-label">Preguntas</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">80%</span>
+      <span class="stat-label">Puntaje mínimo</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">4</span>
+      <span class="stat-label">Bloques temáticos</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">3</span>
+      <span class="stat-label">Días de estudio</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- BLOQUES TEMÁTICOS -->
+  <div class="section-title">Bloques temáticos del examen</div>
+  <div class="bloques-grid">
+
+    <div class="bloque-card movilidad">
+      <div class="bloque-num">1</div>
+      <span class="bloque-icon">🛡️</span>
+      <div class="bloque-title">Movilidad y Seguridad Vial</div>
+      <div class="bloque-pct">~25% del examen</div>
+      <div class="progress-bar"><div class="progress-fill" style="width:25%;background:#fff;opacity:.5"></div></div>
+      <div class="bloque-tags">
+        <span class="tag">Cinturón</span>
+        <span class="tag">Alcohol</span>
+        <span class="tag">Velocidades</span>
+        <span class="tag">Peatones</span>
+      </div>
+    </div>
+
+    <div class="bloque-card normas">
+      <div class="bloque-num">2</div>
+      <span class="bloque-icon">📋</span>
+      <div class="bloque-title">Normas de Tránsito</div>
+      <div class="bloque-pct">~30% del examen</div>
+      <div class="progress-bar"><div class="progress-fill" style="width:30%;background:#fff;opacity:.5"></div></div>
+      <div class="bloque-tags">
+        <span class="tag">Código Tránsito</span>
+        <span class="tag">Prelación</span>
+        <span class="tag">SOAT</span>
+        <span class="tag">Multas</span>
+      </div>
+    </div>
+
+    <div class="bloque-card senales">
+      <div class="bloque-num">3</div>
+      <span class="bloque-icon">🚦</span>
+      <div class="bloque-title">Señalización Vial</div>
+      <div class="bloque-pct">~30% del examen</div>
+      <div class="progress-bar"><div class="progress-fill" style="width:30%;background:rgba(0,48,135,.4)"></div></div>
+      <div class="bloque-tags">
+        <span class="tag">Preventivas</span>
+        <span class="tag">Reglamentarias</span>
+        <span class="tag">Informativas</span>
+        <span class="tag">Semáforos</span>
+      </div>
+    </div>
+
+    <div class="bloque-card mecanica">
+      <div class="bloque-num">4</div>
+      <span class="bloque-icon">🔧</span>
+      <div class="bloque-title">El Vehículo (Mecánica)</div>
+      <div class="bloque-pct">~15% del examen</div>
+      <div class="progress-bar"><div class="progress-fill" style="width:15%;background:#fff;opacity:.5"></div></div>
+      <div class="bloque-tags">
+        <span class="tag">Motor</span>
+        <span class="tag">Frenos</span>
+        <span class="tag">Luces</span>
+        <span class="tag">Neumáticos</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PLAN 3 DÍAS -->
+  <div class="section-title">Plan día a día — Intensivo 3 días</div>
+  <div class="dias-grid">
+
+    <div class="dia-row d1">
+      <div class="dia-label">Día<span>1</span>Mañana</div>
+      <div class="dia-content">
+        <div class="dia-tema">🛡️ Seguridad Vial + 📋 Normas de Tránsito</div>
+        <ul class="dia-actividades">
+          <li>Velocidades máximas: urbana (50 km/h), carretera (80), autopista (120)</li>
+          <li>Distancia de seguridad: regla de los 3 segundos</li>
+          <li>Cinturón, silla infantil, uso del celular al volante</li>
+          <li>Prelación en intersecciones: quién cede el paso</li>
+          <li>Normas de adelantamiento y cambio de carril</li>
+          <li>Documentos obligatorios: licencia, SOAT, RTM, tarjeta de propiedad</li>
+          <li>Embriaguez: niveles, sanciones y consecuencias</li>
+          <li>Hacer 30 preguntas en PracticaTest (seguridad + normas)</li>
+        </ul>
+      </div>
+      <div class="dia-tiempo">3 horas<span>mañana</span></div>
+    </div>
+
+    <div class="dia-row d1">
+      <div class="dia-label">Día<span>1</span>Tarde</div>
+      <div class="dia-content">
+        <div class="dia-tema">📋 Multas e Infracciones + primer simulacro</div>
+        <ul class="dia-actividades">
+          <li>Comparendos: tipos (A, B, C, D) y consecuencias</li>
+          <li>Inmovilización y retención del vehículo: cuándo aplica</li>
+          <li>Derechos y deberes del peatón y del conductor</li>
+          <li>Revisar tabla de multas clave (ver sección abajo)</li>
+          <li>Simulacro completo de 40 preguntas cronometrado</li>
+          <li>Anotar en qué temas fallaste</li>
+        </ul>
+      </div>
+      <div class="dia-tiempo">2.5 horas<span>tarde</span></div>
+    </div>
+
+    <div class="dia-row d3">
+      <div class="dia-label">Día<span>2</span>Mañana</div>
+      <div class="dia-content">
+        <div class="dia-tema">🚦 Señalización Vial (bloque más importante)</div>
+        <ul class="dia-actividades">
+          <li>Señales reglamentarias (círculo rojo): PARE, ceda, no gire, velocidad máx.</li>
+          <li>Señales preventivas (rombo amarillo): curvas, cruces, peatones, escuelas</li>
+          <li>Señales informativas (rectángulo verde/azul): destinos, servicios</li>
+          <li>Demarcaciones: línea continua (no adelantar), discontinua, doble amarilla</li>
+          <li>Semáforos: verde, amarillo, rojo y flechas direccionales</li>
+          <li>Hacer 40 preguntas solo de señales en PracticaTest</li>
+        </ul>
+      </div>
+      <div class="dia-tiempo">3 horas<span>mañana</span></div>
+    </div>
+
+    <div class="dia-row d4">
+      <div class="dia-label">Día<span>2</span>Tarde</div>
+      <div class="dia-content">
+        <div class="dia-tema">🔧 Mecánica básica + repaso de errores día 1</div>
+        <ul class="dia-actividades">
+          <li>Partes del motor: función del aceite, refrigerante, batería</li>
+          <li>Frenos: ABS, freno de mano, señales de fallo</li>
+          <li>Neumáticos: presión, desgaste, cambio en carretera</li>
+          <li>Luces obligatorias: cuándo usar cada una</li>
+          <li>RTM: qué revisa y cada cuánto se renueva (2 años vehículos nuevos)</li>
+          <li>Repasar temas donde fallaste el día 1</li>
+          <li>Hacer 25 preguntas mixtas</li>
+        </ul>
+      </div>
+      <div class="dia-tiempo">2.5 horas<span>tarde</span></div>
+    </div>
+
+    <div class="dia-row d6">
+      <div class="dia-label">Día<span>3</span>Mañana</div>
+      <div class="dia-content">
+        <div class="dia-tema">🔁 Repaso intensivo de puntos débiles</div>
+        <ul class="dia-actividades">
+          <li>Repasar solo los temas donde has fallado en simulacros</li>
+          <li>Ver videos de señales en YouTube (busca "señales tránsito Colombia")</li>
+          <li>Releer la tabla de multas y velocidades máximas</li>
+          <li>Hacer 2 simulacros completos de 40 preguntas</li>
+          <li>Meta: superar el 85% en ambos</li>
+        </ul>
+      </div>
+      <div class="dia-tiempo">2.5 horas<span>mañana</span></div>
+    </div>
+
+    <div class="dia-row d7">
+      <div class="dia-label">Día<span>3</span>Tarde</div>
+      <div class="dia-content">
+        <div class="dia-tema">✅ Simulacro final + preparación logística</div>
+        <ul class="dia-actividades">
+          <li>1 simulacro final cronometrado — condiciones reales de examen</li>
+          <li>Revisar únicamente los errores del simulacro final</li>
+          <li>Preparar los documentos para el día del examen</li>
+          <li>No estudiar más: descansar la mente 🧠</li>
+          <li>Dormir bien esta noche 🛏️</li>
+        </ul>
+      </div>
+      <div class="dia-tiempo">1.5 horas<span>tarde</span></div>
+    </div>
+
+  </div>
+
+  <!-- MULTAS MÁS FRECUENTES -->
+  <div class="section-title">Multas clave que debes memorizar</div>
+  <table class="multas-table">
+    <thead>
+      <tr>
+        <th>Infracción</th>
+        <th>Nivel</th>
+        <th>Consecuencia adicional</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Conducir en estado de embriaguez (1er grado, 40–99 mg/100 ml)</td>
+        <td><span class="nivel nivel-b">Moderado</span></td>
+        <td>Suspensión licencia 1 año + curso</td>
+      </tr>
+      <tr>
+        <td>Embriaguez grado 2 o 3 (100 mg+ o drogadicción)</td>
+        <td><span class="nivel nivel-a">Alto</span></td>
+        <td>Suspensión 3–10 años + inmovilización</td>
+      </tr>
+      <tr>
+        <td>No usar cinturón de seguridad</td>
+        <td><span class="nivel nivel-c">Leve</span></td>
+        <td>Multa económica</td>
+      </tr>
+      <tr>
+        <td>Hablar por celular sin manos libres</td>
+        <td><span class="nivel nivel-b">Moderado</span></td>
+        <td>Multa + retención del vehículo</td>
+      </tr>
+      <tr>
+        <td>No respetar señal de PARE o semáforo en rojo</td>
+        <td><span class="nivel nivel-a">Alto</span></td>
+        <td>Multa + posible suspensión</td>
+      </tr>
+      <tr>
+        <td>Exceso de velocidad en zona escolar</td>
+        <td><span class="nivel nivel-a">Alto</span></td>
+        <td>Multa mayor + inmovilización</td>
+      </tr>
+      <tr>
+        <td>Conducir sin SOAT vigente</td>
+        <td><span class="nivel nivel-b">Moderado</span></td>
+        <td>Inmovilización del vehículo</td>
+      </tr>
+      <tr>
+        <td>No portar documentos obligatorios</td>
+        <td><span class="nivel nivel-d">Leve</span></td>
+        <td>Multa leve</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- TIPS EXAMEN -->
+  <div class="section-title">Tips para el día del examen</div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <span class="tip-icon">📄</span>
+      <div>
+        <div class="tip-title">Lleva todos los documentos</div>
+        <p class="tip-text">Cédula original, comprobante de inscripción y certificado del CEA. Sin estos no te dejan presentar.</p>
+      </div>
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon">⏱️</span>
+      <div>
+        <div class="tip-title">Administra el tiempo</div>
+        <p class="tip-text">Lee cada pregunta dos veces. No te quedes atascado: marca las que no sabes y vuelve al final.</p>
+      </div>
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon">🎯</span>
+      <div>
+        <div class="tip-title">Descarta opciones</div>
+        <p class="tip-text">Si no sabes la respuesta, elimina las opciones claramente incorrectas y elige entre las que quedan.</p>
+      </div>
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon">🚦</span>
+      <div>
+        <div class="tip-title">Las señales tienen lógica</div>
+        <p class="tip-text">Rojo = prohibición o pare. Amarillo/rombo = precaución. Azul/verde = información. Aplica esto si dudas.</p>
+      </div>
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon">😴</span>
+      <div>
+        <div class="tip-title">Duerme bien la noche anterior</div>
+        <p class="tip-text">El descanso mejora la memoria y la concentración más que estudiar de madrugada.</p>
+      </div>
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon">❓</span>
+      <div>
+        <div class="tip-title">Cuidado con "todas las anteriores"</div>
+        <p class="tip-text">En el examen colombiano esta opción suele ser correcta cuando las otras tres opciones parecen válidas.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECURSOS -->
+  <div class="section-title">Recursos gratuitos para practicar</div>
+  <div class="recursos-grid">
+    <div class="recurso-card">
+      <div class="recurso-tipo">🌐 Web</div>
+      <div class="recurso-nombre">PracticaTest Colombia</div>
+      <p class="recurso-desc">+3500 preguntas oficiales con corrección de errores. practicatest.co</p>
+    </div>
+    <div class="recurso-card">
+      <div class="recurso-tipo">📱 App Android</div>
+      <div class="recurso-nombre">Simulador Examen Colombia</div>
+      <p class="recurso-desc">Examen por grupos temáticos. Disponible en Google Play Store gratis.</p>
+    </div>
+    <div class="recurso-card">
+      <div class="recurso-tipo">📖 Documento oficial</div>
+      <div class="recurso-nombre">Manual del Conductor</div>
+      <p class="recurso-desc">Disponible en escuelavial.com.co — base legal del examen.</p>
+    </div>
+    <div class="recurso-card">
+      <div class="recurso-tipo">🎬 YouTube</div>
+      <div class="recurso-nombre">Videos de señales INVÍAS</div>
+      <p class="recurso-desc">Busca "señales de tránsito Colombia" — aprendizaje visual rápido.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Basado en los 4 núcleos temáticos oficiales del examen · Resolución Ministerio de Transporte Colombia<br>
+  <strong>¡Mucho éxito en tu examen!</strong> 🚗
+</div>
+
+</body>
+</html>
