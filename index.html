@@ -1,746 +1,964 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Plan de Estudio · Licencia B1 Colombia</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --rojo: #e63329;
-    --amarillo: #f5c518;
-    --azul: #003087;
-    --verde: #1a7a4a;
-    --bg: #f7f4ef;
-    --text: #1a1a1a;
-    --card: #ffffff;
-    --muted: #6b6560;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Cumpleaños, Mi Amor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Playfair Display', 'serif'],
+                        body: ['Lato', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --bg: #0c0a0e;
+            --fg: #f5ede6;
+            --accent: #d4a574;
+            --rose: #c4727f;
+            --blush: #e8a0b4;
+            --muted: #8a7b6b;
+            --card: rgba(255,255,255,0.035);
+            --border: rgba(212,165,116,0.12);
+        }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-  }
+        body {
+            background: var(--bg);
+            color: var(--fg);
+            font-family: 'Lato', sans-serif;
+            overflow-x: hidden;
+        }
 
-  /* HERO */
-  .hero {
-    background: var(--azul);
-    padding: 48px 40px 40px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -60px; right: -60px;
-    width: 300px; height: 300px;
-    background: var(--amarillo);
-    border-radius: 50%;
-    opacity: 0.12;
-  }
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: -80px; left: 30%;
-    width: 200px; height: 200px;
-    background: var(--rojo);
-    border-radius: 50%;
-    opacity: 0.15;
-  }
-  .hero-badge {
-    display: inline-block;
-    background: var(--amarillo);
-    color: var(--azul);
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 6px 14px;
-    border-radius: 4px;
-    margin-bottom: 16px;
-  }
-  .hero h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(28px, 5vw, 44px);
-    font-weight: 800;
-    color: #fff;
-    line-height: 1.1;
-    max-width: 600px;
-    margin-bottom: 12px;
-  }
-  .hero h1 span { color: var(--amarillo); }
-  .hero-sub {
-    color: rgba(255,255,255,0.7);
-    font-size: 15px;
-    max-width: 480px;
-    line-height: 1.5;
-  }
-  .hero-stats {
-    display: flex;
-    gap: 32px;
-    margin-top: 32px;
-    flex-wrap: wrap;
-  }
-  .stat {
-    text-align: center;
-  }
-  .stat-num {
-    font-family: 'Syne', sans-serif;
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--amarillo);
-    display: block;
-  }
-  .stat-label {
-    font-size: 12px;
-    color: rgba(255,255,255,0.6);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
+        /* ===== Partículas doradas ===== */
+        #particles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
 
-  /* MAIN LAYOUT */
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 40px 24px 60px;
-  }
+        /* ===== Confetti ===== */
+        #confetti {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 999;
+        }
 
-  /* SECTION TITLE */
-  .section-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .section-title::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: #ddd;
-  }
+        /* ===== Blobs de fondo ===== */
+        .bg-blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(130px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .blob-1 {
+            width: 500px; height: 500px;
+            background: rgba(196,114,127,0.07);
+            top: 5%; left: -8%;
+            animation: blobFloat 20s ease-in-out infinite;
+        }
+        .blob-2 {
+            width: 420px; height: 420px;
+            background: rgba(212,165,116,0.05);
+            bottom: 8%; right: -8%;
+            animation: blobFloat 25s ease-in-out infinite reverse;
+        }
+        .blob-3 {
+            width: 350px; height: 350px;
+            background: rgba(232,160,180,0.04);
+            top: 45%; left: 35%;
+            animation: blobFloat 22s ease-in-out infinite 5s;
+        }
+        @keyframes blobFloat {
+            0%, 100% { transform: translate(0,0) scale(1); }
+            33% { transform: translate(30px,-30px) scale(1.05); }
+            66% { transform: translate(-20px,20px) scale(0.95); }
+        }
 
-  /* BLOQUES TEMÁTICOS */
-  .bloques-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 16px;
-    margin-bottom: 48px;
-  }
-  .bloque-card {
-    border-radius: 14px;
-    padding: 22px 20px;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.2s;
-  }
-  .bloque-card:hover { transform: translateY(-3px); }
-  .bloque-card.movilidad { background: var(--azul); color: #fff; }
-  .bloque-card.normas    { background: var(--rojo); color: #fff; }
-  .bloque-card.senales   { background: var(--amarillo); color: var(--azul); }
-  .bloque-card.mecanica  { background: var(--verde); color: #fff; }
+        /* ===== Pantalla de bienvenida ===== */
+        .welcome-overlay {
+            position: fixed; inset: 0; z-index: 1000;
+            background: var(--bg);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            cursor: pointer;
+            transition: opacity 1.2s ease, visibility 1.2s ease;
+        }
+        .welcome-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
-  .bloque-num {
-    font-family: 'Syne', sans-serif;
-    font-size: 42px;
-    font-weight: 800;
-    opacity: 0.2;
-    position: absolute;
-    top: 10px; right: 16px;
-    line-height: 1;
-  }
-  .bloque-icon {
-    font-size: 28px;
-    margin-bottom: 10px;
-    display: block;
-  }
-  .bloque-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 6px;
-    line-height: 1.2;
-  }
-  .bloque-pct {
-    font-size: 12px;
-    opacity: 0.75;
-  }
-  .bloque-tags {
-    margin-top: 12px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-  }
-  .tag {
-    font-size: 10px;
-    font-weight: 500;
-    padding: 3px 8px;
-    border-radius: 20px;
-    background: rgba(255,255,255,0.2);
-  }
-  .bloque-card.senales .tag { background: rgba(0,0,0,0.1); }
+        .welcome-heart {
+            width: 90px; height: 90px;
+            animation: heartbeat 1.4s ease-in-out infinite;
+        }
+        .welcome-heart svg { width: 100%; height: 100%; }
 
-  /* DÍAS */
-  .dias-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 48px;
-  }
-  .dia-row {
-    background: var(--card);
-    border-radius: 14px;
-    padding: 20px 24px;
-    display: grid;
-    grid-template-columns: 90px 1fr auto;
-    gap: 20px;
-    align-items: center;
-    border-left: 4px solid transparent;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    transition: box-shadow 0.2s;
-  }
-  .dia-row:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
-  .dia-row.d1 { border-color: var(--azul); }
-  .dia-row.d2 { border-color: var(--rojo); }
-  .dia-row.d3 { border-color: var(--amarillo); }
-  .dia-row.d4 { border-color: var(--verde); }
-  .dia-row.d5 { border-color: #8b5cf6; }
-  .dia-row.d6 { border-color: #f97316; }
-  .dia-row.d7 { border-color: #0ea5e9; }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            14% { transform: scale(1.18); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.12); }
+        }
 
-  .dia-label {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 13px;
-    color: var(--muted);
-  }
-  .dia-label span {
-    display: block;
-    font-size: 22px;
-    color: var(--text);
-    line-height: 1.1;
-  }
-  .dia-content {}
-  .dia-tema {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 15px;
-    margin-bottom: 4px;
-  }
-  .dia-actividades {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.6;
-  }
-  .dia-actividades li {
-    list-style: none;
-    padding-left: 0;
-  }
-  .dia-actividades li::before {
-    content: '→ ';
-    color: var(--rojo);
-    font-weight: 600;
-  }
-  .dia-tiempo {
-    font-family: 'Syne', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--muted);
-    white-space: nowrap;
-    text-align: right;
-  }
-  .dia-tiempo span {
-    display: block;
-    font-size: 10px;
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
+        .welcome-text {
+            margin-top: 2.5rem;
+            font-weight: 300; font-size: 1rem;
+            color: var(--muted);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            animation: fadePulse 2.5s ease-in-out infinite;
+        }
+        @keyframes fadePulse {
+            0%, 100% { opacity: 0.35; }
+            50% { opacity: 1; }
+        }
 
-  /* TIPS EXAMEN */
-  .tips-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 14px;
-    margin-bottom: 48px;
-  }
-  .tip-card {
-    background: var(--card);
-    border-radius: 12px;
-    padding: 18px 20px;
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  }
-  .tip-icon {
-    font-size: 24px;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .tip-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-  .tip-text {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.5;
-  }
+        /* ===== Hero ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            position: relative; z-index: 2;
+            text-align: center; padding: 2rem;
+        }
+        .hero-eyebrow {
+            font-weight: 300; font-size: 0.85rem;
+            letter-spacing: 0.3em; text-transform: uppercase;
+            color: var(--muted);
+            opacity: 0; transform: translateY(30px);
+            animation: revealUp 1.2s ease forwards 0.4s;
+        }
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: clamp(3rem, 10vw, 8rem);
+            line-height: 1.05;
+            background: linear-gradient(135deg, var(--accent) 0%, #f0d4a8 40%, var(--accent) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0; transform: translateY(40px);
+            animation: revealUp 1.4s ease forwards 0.8s;
+        }
+        .hero-name {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400; font-style: italic;
+            font-size: clamp(1.4rem, 5vw, 3.2rem);
+            color: var(--blush);
+            margin-top: 0.8rem;
+            opacity: 0; transform: translateY(30px);
+            animation: revealUp 1.4s ease forwards 1.4s;
+        }
+        .hero-line {
+            width: 80px; height: 1px;
+            background: linear-gradient(to right, transparent, var(--accent), transparent);
+            margin: 2rem auto;
+            opacity: 0;
+            animation: revealUp 1s ease forwards 1.8s;
+        }
+        .hero-sub {
+            font-weight: 300;
+            font-size: clamp(0.9rem, 2vw, 1.15rem);
+            color: var(--muted);
+            letter-spacing: 0.08em;
+            max-width: 500px;
+            opacity: 0; transform: translateY(20px);
+            animation: revealUp 1.2s ease forwards 2s;
+        }
+        .scroll-hint {
+            position: absolute; bottom: 2.5rem;
+            opacity: 0;
+            animation: revealUp 1s ease forwards 2.8s;
+        }
+        .scroll-hint i {
+            color: var(--muted); font-size: 1.3rem;
+            animation: softBounce 2.5s ease infinite;
+        }
+        @keyframes revealUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes softBounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
 
-  /* RECURSOS */
-  .recursos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 14px;
-    margin-bottom: 48px;
-  }
-  .recurso-card {
-    background: var(--card);
-    border-radius: 12px;
-    padding: 18px 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    border-top: 3px solid var(--azul);
-  }
-  .recurso-card:nth-child(2) { border-color: var(--rojo); }
-  .recurso-card:nth-child(3) { border-color: var(--verde); }
-  .recurso-card:nth-child(4) { border-color: #8b5cf6; }
-  .recurso-tipo {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 6px;
-  }
-  .recurso-nombre {
-    font-family: 'Syne', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-  .recurso-desc {
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.5;
-  }
+        /* ===== Secciones generales ===== */
+        .section-wrap {
+            position: relative; z-index: 2;
+            padding: 7rem 2rem;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: clamp(1.8rem, 5vw, 3.2rem);
+            text-align: center; margin-bottom: 0.8rem;
+        }
+        .section-sub {
+            text-align: center;
+            color: var(--muted);
+            font-weight: 300; font-size: 1.05rem;
+            margin-bottom: 4rem;
+            letter-spacing: 0.04em;
+        }
+        .divider {
+            width: 50px; height: 1px;
+            background: linear-gradient(to right, transparent, var(--accent), transparent);
+            margin: 0 auto 3rem;
+        }
 
-  /* MULTAS */
-  .multas-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--card);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    margin-bottom: 48px;
-    font-size: 13px;
-  }
-  .multas-table th {
-    background: var(--azul);
-    color: #fff;
-    font-family: 'Syne', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 12px 16px;
-    text-align: left;
-  }
-  .multas-table td {
-    padding: 12px 16px;
-    border-bottom: 1px solid #f0ece6;
-    vertical-align: top;
-    line-height: 1.5;
-    color: var(--text);
-  }
-  .multas-table tr:last-child td { border-bottom: none; }
-  .multas-table tr:hover td { background: #faf7f2; }
-  .nivel {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-  }
-  .nivel-a { background: #fee2e2; color: #b91c1c; }
-  .nivel-b { background: #fef3c7; color: #92400e; }
-  .nivel-c { background: #dbeafe; color: #1e40af; }
-  .nivel-d { background: #d1fae5; color: #065f46; }
+        /* ===== Razones (cards) ===== */
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 1.8rem;
+            max-width: 1100px; margin: 0 auto;
+        }
+        .reason-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.23,1,0.32,1);
+            opacity: 0; transform: translateY(50px);
+        }
+        .reason-card.visible { opacity: 1; transform: translateY(0); }
+        .reason-card:hover {
+            transform: translateY(-10px);
+            background: rgba(212,165,116,0.055);
+            border-color: rgba(212,165,116,0.28);
+            box-shadow: 0 24px 64px rgba(212,165,116,0.07);
+        }
+        .reason-icon {
+            width: 58px; height: 58px; border-radius: 50%;
+            background: linear-gradient(135deg, rgba(196,114,127,0.12), rgba(212,165,116,0.12));
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1.4rem;
+            font-size: 1.3rem; color: var(--accent);
+        }
+        .reason-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem; margin-bottom: 0.7rem;
+        }
+        .reason-card p {
+            font-weight: 300; color: var(--muted);
+            line-height: 1.75; font-size: 0.93rem;
+        }
 
-  /* FOOTER */
-  .footer {
-    background: var(--azul);
-    color: rgba(255,255,255,0.6);
-    text-align: center;
-    padding: 24px;
-    font-size: 12px;
-  }
-  .footer strong { color: var(--amarillo); }
+        /* ===== Galería ===== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 240px);
+            gap: 1rem;
+            max-width: 960px; margin: 0 auto;
+        }
+        .gallery-item {
+            border-radius: 14px;
+            overflow: hidden; position: relative;
+            cursor: pointer;
+            opacity: 0; transform: scale(0.92);
+            transition: all 0.7s cubic-bezier(0.23,1,0.32,1);
+        }
+        .gallery-item.visible { opacity: 1; transform: scale(1); }
+        .gallery-item:nth-child(1) { grid-row: span 2; }
+        .gallery-item:nth-child(4) { grid-column: span 2; }
+        .gallery-item img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .gallery-item:hover img { transform: scale(1.08); }
+        .gallery-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(12,10,14,0.85) 0%, transparent 55%);
+            display: flex; align-items: flex-end;
+            padding: 1.4rem;
+            opacity: 0; transition: opacity 0.4s ease;
+        }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-overlay span {
+            font-family: 'Playfair Display', serif;
+            font-style: italic; font-size: 1.05rem;
+            color: var(--blush);
+        }
 
-  /* PROGRESS BAR */
-  .progress-bar {
-    height: 6px;
-    background: #e5e0d8;
-    border-radius: 3px;
-    overflow: hidden;
-    margin-top: 6px;
-  }
-  .progress-fill {
-    height: 100%;
-    border-radius: 3px;
-    background: var(--rojo);
-  }
+        /* ===== Pastel interactivo ===== */
+        .cake-wrapper {
+            display: flex; flex-direction: column;
+            align-items: center; margin-top: 1.5rem;
+        }
+        .cake-hint {
+            font-weight: 300; color: var(--muted);
+            font-size: 0.9rem; margin-bottom: 1.5rem;
+            letter-spacing: 0.05em;
+            transition: opacity 0.5s ease;
+        }
+        .cake-hint.hidden { opacity: 0; }
+        .cake { display: flex; flex-direction: column; align-items: center; }
+        .candles-row { display: flex; gap: 16px; margin-bottom: -3px; z-index: 3; }
+        .candle { display: flex; flex-direction: column; align-items: center; cursor: pointer; }
+        .flame-wrap {
+            width: 20px; height: 28px;
+            display: flex; align-items: flex-end; justify-content: center;
+            position: relative;
+        }
+        .flame {
+            width: 10px; height: 18px;
+            background: radial-gradient(ellipse at bottom, #ffd700 0%, #ff8c00 45%, #ff4500 75%, transparent 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: flicker 0.25s ease-in-out infinite alternate;
+            transition: all 0.5s ease;
+            filter: blur(0.3px);
+        }
+        .flame.out { opacity: 0; transform: scale(0) translateY(-5px); }
+        .flame-glow {
+            position: absolute;
+            width: 28px; height: 28px;
+            background: radial-gradient(circle, rgba(255,200,50,0.25) 0%, transparent 70%);
+            border-radius: 50%; top: -4px;
+            transition: opacity 0.5s ease;
+        }
+        .candle.blown .flame-glow { opacity: 0; }
+        @keyframes flicker {
+            0% { transform: scaleY(1) scaleX(1) rotate(-2deg); }
+            100% { transform: scaleY(1.12) scaleX(0.88) rotate(2deg); }
+        }
+        .candle-stick {
+            width: 7px; height: 38px;
+            background: linear-gradient(to right, #f5e0c0, #d4a574, #f5e0c0);
+            border-radius: 2px;
+        }
+        .cake-layer { position: relative; }
+        .cake-top-layer {
+            width: 150px; height: 48px;
+            background: linear-gradient(135deg, #f5c6d0, #e8a0b4);
+            border-radius: 10px 10px 3px 3px;
+            z-index: 2;
+        }
+        .cake-mid-layer {
+            width: 190px; height: 52px;
+            background: linear-gradient(135deg, #e8a0b4, #c4727f);
+            margin-top: -1px;
+        }
+        .cake-bot-layer {
+            width: 230px; height: 58px;
+            background: linear-gradient(135deg, #c4727f, #a85a66);
+            border-radius: 3px 3px 14px 14px;
+            margin-top: -1px;
+        }
+        .frosting {
+            position: absolute; top: -5px; left: 5%; width: 90%; height: 12px;
+            display: flex; justify-content: space-around;
+        }
+        .frost-drop {
+            width: 20px; height: 12px;
+            background: rgba(255,255,255,0.88);
+            border-radius: 0 0 50% 50%;
+        }
+        .cake-plate {
+            width: 270px; height: 12px;
+            background: linear-gradient(to bottom, #e0d8d0, #c8c0b8);
+            border-radius: 0 0 50% 50% / 0 0 100% 100%;
+            margin-top: 3px;
+        }
+        .cake-msg {
+            margin-top: 2rem;
+            font-family: 'Playfair Display', serif;
+            font-style: italic; font-size: 1.25rem;
+            color: var(--blush);
+            transition: all 0.6s ease;
+            min-height: 2em;
+        }
+        .cake-msg.celebrate {
+            color: var(--accent);
+            animation: textGlow 1.5s ease infinite alternate;
+        }
+        @keyframes textGlow {
+            from { text-shadow: 0 0 8px rgba(212,165,116,0.2); }
+            to { text-shadow: 0 0 28px rgba(212,165,116,0.55), 0 0 60px rgba(212,165,116,0.15); }
+        }
 
-  @media (max-width: 600px) {
-    .dia-row { grid-template-columns: 70px 1fr; }
-    .dia-tiempo { display: none; }
-    .hero { padding: 32px 20px; }
-    .container { padding: 24px 16px 40px; }
-  }
-</style>
+        /* ===== Carta de amor ===== */
+        .letter-box {
+            max-width: 620px; margin: 0 auto;
+            padding: 3rem 2.5rem;
+            background: linear-gradient(145deg, rgba(245,237,230,0.025), rgba(212,165,116,0.025));
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            position: relative; overflow: hidden;
+            opacity: 0; transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.23,1,0.32,1);
+        }
+        .letter-box.visible { opacity: 1; transform: translateY(0); }
+        .letter-box::before {
+            content: '';
+            position: absolute; top: -1px; right: -1px;
+            width: 90px; height: 90px;
+            background: linear-gradient(135deg, var(--accent), var(--rose));
+            clip-path: polygon(100% 0, 0 0, 100% 100%);
+            opacity: 0.2;
+        }
+        .letter-box::after {
+            content: '';
+            position: absolute; bottom: -1px; left: -1px;
+            width: 90px; height: 90px;
+            background: linear-gradient(315deg, var(--accent), var(--rose));
+            clip-path: polygon(0 100%, 100% 100%, 0 0);
+            opacity: 0.12;
+        }
+        .letter-text {
+            font-weight: 300; line-height: 2;
+            font-size: 1.02rem;
+            color: rgba(245,237,230,0.82);
+            position: relative; z-index: 1;
+        }
+        .letter-text .hl { color: var(--blush); font-weight: 400; }
+        .letter-text .hl-gold { color: var(--accent); font-weight: 400; }
+        .letter-sig {
+            margin-top: 2rem; text-align: right;
+            font-family: 'Playfair Display', serif;
+            font-style: italic; font-size: 1.4rem;
+            color: var(--accent);
+            position: relative; z-index: 1;
+        }
+
+        /* ===== Sección final ===== */
+        .final-wrap {
+            min-height: 65vh;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center; position: relative; z-index: 2;
+            padding: 5rem 2rem;
+        }
+        .final-heart {
+            font-size: 3.5rem; color: var(--rose);
+            animation: heartbeat 1.4s ease-in-out infinite;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 0 20px rgba(196,114,127,0.3));
+        }
+        .final-heading {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: clamp(2rem, 6vw, 4rem);
+            background: linear-gradient(135deg, var(--blush), var(--accent));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            opacity: 0; transform: translateY(30px);
+            transition: all 1s ease;
+        }
+        .final-heading.visible { opacity: 1; transform: translateY(0); }
+        .final-sub {
+            font-weight: 300; color: var(--muted);
+            font-size: 1.1rem; letter-spacing: 0.08em;
+            opacity: 0; transition: opacity 1s ease 0.3s;
+        }
+        .final-sub.visible { opacity: 1; }
+        .final-year {
+            margin-top: 3rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem; font-weight: 900;
+            color: rgba(212,165,116,0.06);
+            letter-spacing: 0.1em;
+            position: absolute; bottom: 2rem;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 200px);
+            }
+            .gallery-item:nth-child(1) { grid-row: span 1; }
+            .gallery-item:nth-child(4) { grid-column: span 1; }
+            .letter-box { padding: 2rem 1.5rem; }
+        }
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+            .gallery-item { height: 220px; }
+            .cake-top-layer { width: 120px; height: 40px; }
+            .cake-mid-layer { width: 155px; height: 44px; }
+            .cake-bot-layer { width: 190px; height: 50px; }
+            .cake-plate { width: 220px; }
+            .candles-row { gap: 12px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-badge">🇨🇴 Licencia B1 · Colombia</div>
-  <h1>Plan de Estudio<br><span>Prueba Teórica</span><br>en 3 días</h1>
-  <p class="hero-sub">Preparación intensiva para la prueba teórica de conducción. El examen consta de 40 preguntas y debes obtener más del 80% para aprobar.</p>
-  <div class="hero-stats">
-    <div class="stat">
-      <span class="stat-num">40</span>
-      <span class="stat-label">Preguntas</span>
-    </div>
-    <div class="stat">
-      <span class="stat-num">80%</span>
-      <span class="stat-label">Puntaje mínimo</span>
-    </div>
-    <div class="stat">
-      <span class="stat-num">4</span>
-      <span class="stat-label">Bloques temáticos</span>
-    </div>
-    <div class="stat">
-      <span class="stat-num">3</span>
-      <span class="stat-label">Días de estudio</span>
-    </div>
-  </div>
-</div>
+    <!-- Blobs de fondo -->
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
 
-<div class="container">
+    <!-- Canvas de partículas -->
+    <canvas id="particles"></canvas>
 
-  <!-- BLOQUES TEMÁTICOS -->
-  <div class="section-title">Bloques temáticos del examen</div>
-  <div class="bloques-grid">
+    <!-- Canvas de confetti -->
+    <canvas id="confetti"></canvas>
 
-    <div class="bloque-card movilidad">
-      <div class="bloque-num">1</div>
-      <span class="bloque-icon">🛡️</span>
-      <div class="bloque-title">Movilidad y Seguridad Vial</div>
-      <div class="bloque-pct">~25% del examen</div>
-      <div class="progress-bar"><div class="progress-fill" style="width:25%;background:#fff;opacity:.5"></div></div>
-      <div class="bloque-tags">
-        <span class="tag">Cinturón</span>
-        <span class="tag">Alcohol</span>
-        <span class="tag">Velocidades</span>
-        <span class="tag">Peatones</span>
-      </div>
+    <!-- Pantalla de bienvenida -->
+    <div class="welcome-overlay" id="welcome" aria-label="Toca para entrar">
+        <div class="welcome-heart">
+            <svg viewBox="0 0 100 100" fill="none">
+                <path d="M50 88 C25 65, 2 45, 2 28 C2 13, 14 2, 28 2 C38 2, 46 8, 50 16 C54 8, 62 2, 72 2 C86 2, 98 13, 98 28 C98 45, 75 65, 50 88Z"
+                      fill="url(#heartGrad)" />
+                <defs>
+                    <linearGradient id="heartGrad" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#e8a0b4"/>
+                        <stop offset="100%" stop-color="#c4727f"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+        <p class="welcome-text">Toca para entrar</p>
     </div>
 
-    <div class="bloque-card normas">
-      <div class="bloque-num">2</div>
-      <span class="bloque-icon">📋</span>
-      <div class="bloque-title">Normas de Tránsito</div>
-      <div class="bloque-pct">~30% del examen</div>
-      <div class="progress-bar"><div class="progress-fill" style="width:30%;background:#fff;opacity:.5"></div></div>
-      <div class="bloque-tags">
-        <span class="tag">Código Tránsito</span>
-        <span class="tag">Prelación</span>
-        <span class="tag">SOAT</span>
-        <span class="tag">Multas</span>
-      </div>
-    </div>
+    <!-- ===== HERO ===== -->
+    <header class="hero">
+        <p class="hero-eyebrow">Un dia especial para alguien especial</p>
+        <h1 class="hero-title">Feliz Cumpleaños</h1>
+        <!-- ⬇️ CAMBIA AQUÍ el nombre de tu novia ⬇️ -->
+        <p class="hero-name">Mi princesa hermosa</p>
+        <div class="hero-line"></div>
+        <p class="hero-sub">Hoy el mundo celebra que existes, y yo celebro que el universo decidió cruzar nuestro camino</p>
+        <div class="scroll-hint">
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </header>
 
-    <div class="bloque-card senales">
-      <div class="bloque-num">3</div>
-      <span class="bloque-icon">🚦</span>
-      <div class="bloque-title">Señalización Vial</div>
-      <div class="bloque-pct">~30% del examen</div>
-      <div class="progress-bar"><div class="progress-fill" style="width:30%;background:rgba(0,48,135,.4)"></div></div>
-      <div class="bloque-tags">
-        <span class="tag">Preventivas</span>
-        <span class="tag">Reglamentarias</span>
-        <span class="tag">Informativas</span>
-        <span class="tag">Semáforos</span>
-      </div>
-    </div>
+    <!-- ===== RAZONES ===== -->
+    <section class="section-wrap" id="razones">
+        <h2 class="section-title">Te amo porque...</h2>
+        <div class="divider"></div>
+        <p class="section-sub">Hay infinitas razones, pero estas son algunas de mis favoritas</p>
+        <div class="reasons-grid">
+            <div class="reason-card" data-delay="0">
+                <div class="reason-icon"><i class="fa-solid fa-face-smile-beam"></i></div>
+                <h3>Tu sonrisa</h3>
+                <p>Esa sonrisa que ilumina cualquier lugar, que me hace olvidar todo y solo quiero verla una y otra vez</p>
+            </div>
+            <div class="reason-card" data-delay="100">
+                <div class="reason-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                <h3>Tu ternura</h3>
+                <p>La forma en que cuidas de los demás, como si el mundo mereciera siempre lo mejor de ti</p>
+            </div>
+            <div class="reason-card" data-delay="200">
+                <div class="reason-icon"><i class="fa-solid fa-fire"></i></div>
+                <h3>Tu pasión</h3>
+                <p>Como te entregas a lo que amas, con esa fuerza que me inspira a ser mejor persona cada día</p>
+            </div>
+            <div class="reason-card" data-delay="300">
+                <div class="reason-icon"><i class="fa-solid fa-moon"></i></div>
+                <h3>Tu compañía</h3>
+                <p>Incluso en silencio, estar contigo se siente como el lugar más seguro y hermoso del mundo</p>
+            </div>
+            <div class="reason-card" data-delay="400">
+                <div class="reason-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <h3>Tu magia</h3>
+                <p>Tienes algo que no puedo explicar, algo que me hipnotiza desde el primer momento que te vi</p>
+            </div>
+            <div class="reason-card" data-delay="500">
+                <div class="reason-icon"><i class="fa-solid fa-infinity"></i></div>
+                <h3>Eres tú</h3>
+                <p>No necesito una razón específica. Simplemente eres tú, y eso es más que suficiente para amarte</p>
+            </div>
+        </div>
+    </section>
 
-    <div class="bloque-card mecanica">
-      <div class="bloque-num">4</div>
-      <span class="bloque-icon">🔧</span>
-      <div class="bloque-title">El Vehículo (Mecánica)</div>
-      <div class="bloque-pct">~15% del examen</div>
-      <div class="progress-bar"><div class="progress-fill" style="width:15%;background:#fff;opacity:.5"></div></div>
-      <div class="bloque-tags">
-        <span class="tag">Motor</span>
-        <span class="tag">Frenos</span>
-        <span class="tag">Luces</span>
-        <span class="tag">Neumáticos</span>
-      </div>
-    </div>
+    <!-- ===== GALERÍA ===== -->
+    <section class="section-wrap" id="galeria">
+        <h2 class="section-title">Nuestros Momentos</h2>
+        <div class="divider"></div>
+        <p class="section-sub">Cada foto guarda una historia que me hace sonreír</p>
+        <div class="gallery-grid">
+            <div class="gallery-item" data-delay="0">
+                <img src="https://lh3.googleusercontent.com/pw/AP1GczNk1TWFfkie1jwnxtb-LFDB1zKlfp4Tv5mLz28wunykCTcVrHoNV-vdIKluHtgcw4SVy5nA0JXR_NEQV3Y3HsTg-Wr3CDqAAionNLhOl-aSgCoy7tP_I9xJIVE4DV7Ig0HpDsSuWLwTyFHwb0c4CvpZ2g=w599-h599-s-no-gm?authuser=0" alt="Momento especial juntos" loading="lazy">
+                <div class="gallery-overlay"><span>El día que todo cambió</span></div>
+            </div>
+            <div class="gallery-item" data-delay="100">
+                <img src="https://picsum.photos/seed/momento2/600/500.jpg" alt="Sonrisas compartidas" loading="lazy">
+                <div class="gallery-overlay"><span>Sonrisas que guardo</span></div>
+            </div>
+            <div class="gallery-item" data-delay="200">
+                <img src="https://picsum.photos/seed/momento3/600/500.jpg" alt="Aventura juntos" loading="lazy">
+                <div class="gallery-overlay"><span>Nuestras aventuras</span></div>
+            </div>
+            <div class="gallery-item" data-delay="300">
+                <img src="https://picsum.photos/seed/momento4/800/500.jpg" alt="Momento imperfecto perfecto" loading="lazy">
+                <div class="gallery-overlay"><span>Imperfecto y perfecto</span></div>
+            </div>
+            <div class="gallery-item" data-delay="400">
+                <img src="https://picsum.photos/seed/momento5/600/500.jpg" alt="Miradas que dicen todo" loading="lazy">
+                <div class="gallery-overlay"><span>Miradas que hablan</span></div>
+            </div>
+        </div>
+    </section>
 
-  </div>
+    <!-- ===== PASTEL ===== -->
+    <section class="section-wrap" id="pastel">
+        <h2 class="section-title">Pide un deseo</h2>
+        <div class="divider"></div>
+        <p class="section-sub">Toca cada vela para apagarla</p>
+        <div class="cake-wrapper">
+            <p class="cake-hint" id="cakeHint"><i class="fa-regular fa-hand-pointer" style="margin-right:6px;"></i>Toca las velas para soplarlas</p>
+            <div class="cake">
+                <div class="candles-row" id="candlesRow">
+                    <!-- Las velas se generan con JS -->
+                </div>
+                <div class="cake-layer cake-top-layer">
+                    <div class="frosting">
+                        <div class="frost-drop"></div>
+                        <div class="frost-drop"></div>
+                        <div class="frost-drop"></div>
+                        <div class="frost-drop"></div>
+                        <div class="frost-drop"></div>
+                    </div>
+                </div>
+                <div class="cake-layer cake-mid-layer">
+                    <div class="frosting">
+                        <div class="frost-drop"></div>
+                        <div class="frost-drop"></div>
+                        <div class="frost-drop"></div>
+                        <div class="frost-drop"></div>
+                        <div class="frost-drop"></div>
+                        <div class="frost-drop"></div>
+                    </div>
+                </div>
+                <div class="cake-layer cake-bot-layer"></div>
+                <div class="cake-plate"></div>
+            </div>
+            <p class="cake-msg" id="cakeMsg">&nbsp;</p>
+        </div>
+    </section>
 
-  <!-- PLAN 3 DÍAS -->
-  <div class="section-title">Plan día a día — Intensivo 3 días</div>
-  <div class="dias-grid">
+    <!-- ===== CARTA ===== -->
+    <section class="section-wrap" id="carta">
+        <h2 class="section-title">Una carta para ti</h2>
+        <div class="divider"></div>
+        <div class="letter-box" id="letterBox">
+            <div class="letter-text">
+                <p>Mi amor, hoy que cumpliste un año más de vida, quiero que sepas que <span class="hl">eres el mejor regalo que me ha dado la vida</span>.</p>
+                <br>
+                <p>Desde que te conocí, supe que algo especial iba a pasar. No me equivoqué. <span class="hl-gold">Me hiciste descubrir lo que realmente significa amar a alguien</span>, sin condiciones, sin miedos, sin prisa.</p>
+                <br>
+                <p>Gracias por cada risa compartida, por cada abrazo que me reinicia el alma, por escucharme cuando no tengo palabras, por quedarte cuando otros se habrían ido.</p>
+                <br>
+                <p>Quiero seguir construyendo contigo. Quiero ser la persona que te mereces, la que te despierte con sonrisas y te acompañe en tus sueños más locos.</p>
+                <br>
+                <p><span class="hl">Feliz cumpleaños, mi vida entera.</span> Que este nuevo año te llene de todo lo hermoso que tú le das al mundo.</p>
+            </div>
+            <div class="letter-sig">Con todo mi amor, tu novio</div>
+        </div>
+    </section>
 
-    <div class="dia-row d1">
-      <div class="dia-label">Día<span>1</span>Mañana</div>
-      <div class="dia-content">
-        <div class="dia-tema">🛡️ Seguridad Vial + 📋 Normas de Tránsito</div>
-        <ul class="dia-actividades">
-          <li>Velocidades máximas: urbana (50 km/h), carretera (80), autopista (120)</li>
-          <li>Distancia de seguridad: regla de los 3 segundos</li>
-          <li>Cinturón, silla infantil, uso del celular al volante</li>
-          <li>Prelación en intersecciones: quién cede el paso</li>
-          <li>Normas de adelantamiento y cambio de carril</li>
-          <li>Documentos obligatorios: licencia, SOAT, RTM, tarjeta de propiedad</li>
-          <li>Embriaguez: niveles, sanciones y consecuencias</li>
-          <li>Hacer 30 preguntas en PracticaTest (seguridad + normas)</li>
-        </ul>
-      </div>
-      <div class="dia-tiempo">3 horas<span>mañana</span></div>
-    </div>
+    <!-- ===== FINAL ===== -->
+    <footer class="final-wrap">
+        <div class="final-heart">
+            <i class="fa-solid fa-heart"></i>
+        </div>
+        <h2 class="final-heading" id="finalHeading">Eres todo para mí</h2>
+        <p class="final-sub" id="finalSub">Hoy, mañana y siempre</p>
+        <div class="final-year">2026</div>
+    </footer>
 
-    <div class="dia-row d1">
-      <div class="dia-label">Día<span>1</span>Tarde</div>
-      <div class="dia-content">
-        <div class="dia-tema">📋 Multas e Infracciones + primer simulacro</div>
-        <ul class="dia-actividades">
-          <li>Comparendos: tipos (A, B, C, D) y consecuencias</li>
-          <li>Inmovilización y retención del vehículo: cuándo aplica</li>
-          <li>Derechos y deberes del peatón y del conductor</li>
-          <li>Revisar tabla de multas clave (ver sección abajo)</li>
-          <li>Simulacro completo de 40 preguntas cronometrado</li>
-          <li>Anotar en qué temas fallaste</li>
-        </ul>
-      </div>
-      <div class="dia-tiempo">2.5 horas<span>tarde</span></div>
-    </div>
+    <script>
+    /* ===================================================
+       PARTÍCULAS DORADAS FLOTANTES
+       =================================================== */
+    (function initParticles() {
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        let w, h;
+        const particles = [];
+        const COUNT = 60;
 
-    <div class="dia-row d3">
-      <div class="dia-label">Día<span>2</span>Mañana</div>
-      <div class="dia-content">
-        <div class="dia-tema">🚦 Señalización Vial (bloque más importante)</div>
-        <ul class="dia-actividades">
-          <li>Señales reglamentarias (círculo rojo): PARE, ceda, no gire, velocidad máx.</li>
-          <li>Señales preventivas (rombo amarillo): curvas, cruces, peatones, escuelas</li>
-          <li>Señales informativas (rectángulo verde/azul): destinos, servicios</li>
-          <li>Demarcaciones: línea continua (no adelantar), discontinua, doble amarilla</li>
-          <li>Semáforos: verde, amarillo, rojo y flechas direccionales</li>
-          <li>Hacer 40 preguntas solo de señales en PracticaTest</li>
-        </ul>
-      </div>
-      <div class="dia-tiempo">3 horas<span>mañana</span></div>
-    </div>
+        function resize() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
 
-    <div class="dia-row d4">
-      <div class="dia-label">Día<span>2</span>Tarde</div>
-      <div class="dia-content">
-        <div class="dia-tema">🔧 Mecánica básica + repaso de errores día 1</div>
-        <ul class="dia-actividades">
-          <li>Partes del motor: función del aceite, refrigerante, batería</li>
-          <li>Frenos: ABS, freno de mano, señales de fallo</li>
-          <li>Neumáticos: presión, desgaste, cambio en carretera</li>
-          <li>Luces obligatorias: cuándo usar cada una</li>
-          <li>RTM: qué revisa y cada cuánto se renueva (2 años vehículos nuevos)</li>
-          <li>¿Que tiene el kit de carretera?</li>
-          <li>Repasar temas donde fallaste el día 1</li>
-          <li>Hacer 25 preguntas mixtas</li>
-        </ul>
-      </div>
-      <div class="dia-tiempo">2.5 horas<span>tarde</span></div>
-    </div>
+        // Crear partículas
+        for (let i = 0; i < COUNT; i++) {
+            particles.push({
+                x: Math.random() * w,
+                y: Math.random() * h,
+                r: Math.random() * 2 + 0.5,
+                speedY: -(Math.random() * 0.3 + 0.1),
+                speedX: (Math.random() - 0.5) * 0.2,
+                opacity: Math.random() * 0.5 + 0.15,
+                phase: Math.random() * Math.PI * 2
+            });
+        }
 
-    <div class="dia-row d6">
-      <div class="dia-label">Día<span>3</span>Mañana</div>
-      <div class="dia-content">
-        <div class="dia-tema">🔁 Repaso intensivo de puntos débiles</div>
-        <ul class="dia-actividades">
-          <li>Repasar solo los temas donde has fallado en simulacros</li>
-          <li>Ver videos de señales en YouTube (busca "señales tránsito Colombia")</li>
-          <li>Releer la tabla de multas y velocidades máximas</li>
-          <li>Hacer 2 simulacros completos de 40 preguntas</li>
-          <li>Meta: superar el 85% en ambos</li>
-        </ul>
-      </div>
-      <div class="dia-tiempo">2.5 horas<span>mañana</span></div>
-    </div>
+        function draw() {
+            ctx.clearRect(0, 0, w, h);
+            const time = Date.now() * 0.001;
+            particles.forEach(p => {
+                p.x += p.speedX + Math.sin(time + p.phase) * 0.15;
+                p.y += p.speedY;
+                // Reiniciar si sale de pantalla
+                if (p.y < -10) { p.y = h + 10; p.x = Math.random() * w; }
+                if (p.x < -10) p.x = w + 10;
+                if (p.x > w + 10) p.x = -10;
 
-    <div class="dia-row d7">
-      <div class="dia-label">Día<span>3</span>Tarde</div>
-      <div class="dia-content">
-        <div class="dia-tema">✅ Simulacro final + preparación logística</div>
-        <ul class="dia-actividades">
-          <li>1 simulacro final cronometrado — condiciones reales de examen</li>
-          <li>Revisar únicamente los errores del simulacro final</li>
-          <li>Preparar los documentos para el día del examen</li>
-          <li>No estudiar más: descansar la mente 🧠</li>
-          <li>Dormir bien esta noche 🛏️</li>
-        </ul>
-      </div>
-      <div class="dia-tiempo">1.5 horas<span>tarde</span></div>
-    </div>
+                const flicker = 0.7 + 0.3 * Math.sin(time * 2 + p.phase);
+                const alpha = p.opacity * flicker;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, Math.max(0.1, p.r), 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(212,165,116,${alpha})`;
+                ctx.fill();
 
-  </div>
+                // Brillo suave
+                if (p.r > 1.2) {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(212,165,116,${alpha * 0.1})`;
+                    ctx.fill();
+                }
+            });
+            requestAnimationFrame(draw);
+        }
+        draw();
+    })();
 
-  <!-- MULTAS MÁS FRECUENTES -->
-  <div class="section-title">Multas clave que debes memorizar</div>
-  <table class="multas-table">
-    <thead>
-      <tr>
-        <th>Infracción</th>
-        <th>Nivel</th>
-        <th>Consecuencia adicional</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Conducir en estado de embriaguez (1er grado, 40–99 mg/100 ml)</td>
-        <td><span class="nivel nivel-b">Moderado</span></td>
-        <td>Suspensión licencia 1 año + curso</td>
-      </tr>
-      <tr>
-        <td>Embriaguez grado 2 o 3 (100 mg+ o drogadicción)</td>
-        <td><span class="nivel nivel-a">Alto</span></td>
-        <td>Suspensión 3–10 años + inmovilización</td>
-      </tr>
-      <tr>
-        <td>No usar cinturón de seguridad</td>
-        <td><span class="nivel nivel-c">Leve</span></td>
-        <td>Multa económica</td>
-      </tr>
-      <tr>
-        <td>Hablar por celular sin manos libres</td>
-        <td><span class="nivel nivel-b">Moderado</span></td>
-        <td>Multa + retención del vehículo</td>
-      </tr>
-      <tr>
-        <td>No respetar señal de PARE o semáforo en rojo</td>
-        <td><span class="nivel nivel-a">Alto</span></td>
-        <td>Multa + posible suspensión</td>
-      </tr>
-      <tr>
-        <td>Exceso de velocidad en zona escolar</td>
-        <td><span class="nivel nivel-a">Alto</span></td>
-        <td>Multa mayor + inmovilización</td>
-      </tr>
-      <tr>
-        <td>Conducir sin SOAT vigente</td>
-        <td><span class="nivel nivel-b">Moderado</span></td>
-        <td>Inmovilización del vehículo</td>
-      </tr>
-      <tr>
-        <td>No portar documentos obligatorios</td>
-        <td><span class="nivel nivel-d">Leve</span></td>
-        <td>Multa leve</td>
-      </tr>
-    </tbody>
-  </table>
+    /* ===================================================
+       PANTALLA DE BIENVENIDA
+       =================================================== */
+    const welcome = document.getElementById('welcome');
+    welcome.addEventListener('click', () => {
+        welcome.classList.add('hidden');
+    });
 
-  <!-- TIPS EXAMEN -->
-  <div class="section-title">Tips para el día del examen</div>
-  <div class="tips-grid">
-    <div class="tip-card">
-      <span class="tip-icon">📄</span>
-      <div>
-        <div class="tip-title">Lleva todos los documentos</div>
-        <p class="tip-text">Cédula original, comprobante de inscripción y certificado del CEA. Sin estos no te dejan presentar.</p>
-      </div>
-    </div>
-    <div class="tip-card">
-      <span class="tip-icon">⏱️</span>
-      <div>
-        <div class="tip-title">Administra el tiempo</div>
-        <p class="tip-text">Lee cada pregunta dos veces. No te quedes atascado: marca las que no sabes y vuelve al final.</p>
-      </div>
-    </div>
-    <div class="tip-card">
-      <span class="tip-icon">🎯</span>
-      <div>
-        <div class="tip-title">Descarta opciones</div>
-        <p class="tip-text">Si no sabes la respuesta, elimina las opciones claramente incorrectas y elige entre las que quedan.</p>
-      </div>
-    </div>
-    <div class="tip-card">
-      <span class="tip-icon">🚦</span>
-      <div>
-        <div class="tip-title">Las señales tienen lógica</div>
-        <p class="tip-text">Rojo = prohibición o pare. Amarillo/rombo = precaución. Azul/verde = información. Aplica esto si dudas.</p>
-      </div>
-    </div>
-    <div class="tip-card">
-      <span class="tip-icon">😴</span>
-      <div>
-        <div class="tip-title">Duerme bien la noche anterior</div>
-        <p class="tip-text">El descanso mejora la memoria y la concentración más que estudiar de madrugada.</p>
-      </div>
-    </div>
-    <div class="tip-card">
-      <span class="tip-icon">❓</span>
-      <div>
-        <div class="tip-title">Cuidado con "todas las anteriores"</div>
-        <p class="tip-text">En el examen colombiano esta opción suele ser correcta cuando las otras tres opciones parecen válidas.</p>
-      </div>
-    </div>
-  </div>
+    /* ===================================================
+       SCROLL REVEAL (IntersectionObserver)
+       =================================================== */
+    const revealElements = document.querySelectorAll('.reason-card, .gallery-item, .letter-box, .final-heading, .final-sub');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const delay = parseInt(entry.target.dataset.delay || 0);
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, delay);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
-  <!-- RECURSOS -->
-  <div class="section-title">Recursos gratuitos para practicar</div>
-  <div class="recursos-grid">
-    <div class="recurso-card">
-      <div class="recurso-tipo">🌐 Web</div>
-      <div class="recurso-nombre">PracticaTest Colombia</div>
-      <p class="recurso-desc">+3500 preguntas oficiales con corrección de errores. practicatest.co</p>
-    </div>
-    <div class="recurso-card">
-      <div class="recurso-tipo">📱 App Android</div>
-      <div class="recurso-nombre">Simulador Examen Colombia</div>
-      <p class="recurso-desc">Examen por grupos temáticos. Disponible en Google Play Store gratis.</p>
-    </div>
-    <div class="recurso-card">
-      <div class="recurso-tipo">📖 Documento oficial</div>
-      <div class="recurso-nombre">Manual del Conductor</div>
-      <p class="recurso-desc">Disponible en escuelavial.com.co — base legal del examen.</p>
-    </div>
-    <div class="recurso-card">
-      <div class="recurso-tipo">🎬 YouTube</div>
-      <div class="recurso-nombre">Videos de señales INVÍAS</div>
-      <p class="recurso-desc">Busca "señales de tránsito Colombia" — aprendizaje visual rápido.</p>
-    </div>
-  </div>
+    revealElements.forEach(el => observer.observe(el));
 
-</div>
+    /* ===================================================
+       VELAS DEL PASTEL
+       =================================================== */
+    const candlesRow = document.getElementById('candlesRow');
+    const cakeHint = document.getElementById('cakeHint');
+    const cakeMsg = document.getElementById('cakeMsg');
+    const NUM_CANDLES = 5;
+    let blownCount = 0;
 
-<!-- FOOTER -->
-<div class="footer">
-  Basado en los 4 núcleos temáticos oficiales del examen · Resolución Ministerio de Transporte Colombia<br>
-  <strong>¡Mucho éxito en tu examen!</strong> 🚗
-</div>
+    // Generar velas
+    for (let i = 0; i < NUM_CANDLES; i++) {
+        const candle = document.createElement('div');
+        candle.className = 'candle';
+        candle.innerHTML = `
+            <div class="flame-wrap">
+                <div class="flame"></div>
+                <div class="flame-glow"></div>
+            </div>
+            <div class="candle-stick"></div>
+        `;
+        candle.addEventListener('click', () => blowCandle(candle));
+        candlesRow.appendChild(candle);
+    }
 
+    function blowCandle(candle) {
+        if (candle.classList.contains('blown')) return;
+        candle.classList.add('blown');
+        candle.querySelector('.flame').classList.add('out');
+        blownCount++;
+
+        // Pequeña animación de "humo"
+        createSmoke(candle);
+
+        if (blownCount >= NUM_CANDLES) {
+            cakeHint.classList.add('hidden');
+            cakeMsg.textContent = 'Todos tus deseos se harán realidad';
+            cakeMsg.classList.add('celebrate');
+            // Lanzar confetti
+            setTimeout(launchConfetti, 400);
+        } else {
+            const remaining = NUM_CANDLES - blownCount;
+            cakeMsg.textContent = `Faltan ${remaining} vela${remaining > 1 ? 's' : ''}...`;
+        }
+    }
+
+    // Efecto de humo al apagar vela
+    function createSmoke(candle) {
+        const smoke = document.createElement('div');
+        smoke.style.cssText = `
+            position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+            width: 6px; height: 6px; border-radius: 50%;
+            background: rgba(200,190,180,0.3);
+            animation: smokeRise 0.8s ease-out forwards;
+            pointer-events: none;
+        `;
+        candle.querySelector('.flame-wrap').appendChild(smoke);
+        setTimeout(() => smoke.remove(), 800);
+    }
+
+    // Inyectar animación de humo
+    const smokeStyle = document.createElement('style');
+    smokeStyle.textContent = `
+        @keyframes smokeRise {
+            0% { opacity: 0.5; transform: translateX(-50%) translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateX(-50%) translateY(-25px) scale(3); }
+        }
+    `;
+    document.head.appendChild(smokeStyle);
+
+    /* ===================================================
+       CONFETTI
+       =================================================== */
+    function launchConfetti() {
+        const canvas = document.getElementById('confetti');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const pieces = [];
+        const colors = ['#d4a574', '#c4727f', '#e8a0b4', '#f0d4a8', '#fff', '#ffd700'];
+        const TOTAL = 150;
+
+        for (let i = 0; i < TOTAL; i++) {
+            pieces.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height - canvas.height,
+                w: Math.random() * 8 + 4,
+                h: Math.random() * 6 + 3,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                speedY: Math.random() * 3 + 2,
+                speedX: (Math.random() - 0.5) * 2,
+                rotation: Math.random() * 360,
+                rotSpeed: (Math.random() - 0.5) * 8,
+                opacity: 1
+            });
+        }
+
+        let frame = 0;
+        function drawConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            frame++;
+            let active = false;
+
+            pieces.forEach(p => {
+                p.y += p.speedY;
+                p.x += p.speedX;
+                p.rotation += p.rotSpeed;
+                p.speedX += (Math.random() - 0.5) * 0.1;
+
+                // Desvanecer al final
+                if (p.y > canvas.height - 100) {
+                    p.opacity -= 0.02;
+                }
+                if (p.opacity <= 0) return;
+                active = true;
+
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate((p.rotation * Math.PI) / 180);
+                ctx.globalAlpha = Math.max(0, p.opacity);
+                ctx.fillStyle = p.color;
+                ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+                ctx.restore();
+            });
+
+            if (active) {
+                requestAnimationFrame(drawConfetti);
+            } else {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        }
+        drawConfetti();
+    }
+
+    /* ===================================================
+       EFECTO PARALLAX SUAVE EN EL HERO
+       =================================================== */
+    const hero = document.querySelector('.hero');
+    window.addEventListener('mousemove', (e) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 10;
+        const y = (e.clientY / window.innerHeight - 0.5) * 10;
+        if (hero) {
+            hero.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+        }
+    });
+
+    /* ===================================================
+       CURSOR PERSONALIZADO (solo desktop)
+       =================================================== */
+    if (window.matchMedia('(pointer: fine)').matches) {
+        const cursor = document.createElement('div');
+        cursor.style.cssText = `
+            position: fixed; width: 20px; height: 20px;
+            border: 1.5px solid rgba(212,165,116,0.4);
+            border-radius: 50%; pointer-events: none;
+            z-index: 9999; transition: transform 0.15s ease, opacity 0.3s ease;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference; opacity: 0;
+        `;
+        document.body.appendChild(cursor);
+
+        // Ocultar en la pantalla de bienvenida
+        let welcomeVisible = true;
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            if (!welcomeVisible) cursor.style.opacity = '1';
+        });
+
+        // Efecto hover en elementos interactivos
+        document.querySelectorAll('a, button, .candle, .gallery-item, .reason-card, .welcome-overlay').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(2)';
+                cursor.style.borderColor = 'rgba(232,160,180,0.5)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursor.style.borderColor = 'rgba(212,165,116,0.4)';
+            });
+        });
+
+        welcome.addEventListener('click', () => {
+            welcomeVisible = false;
+        });
+    }
+    </script>
 </body>
 </html>
